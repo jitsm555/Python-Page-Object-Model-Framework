@@ -17,15 +17,14 @@ import unittest
 from time import sleep
 
 from appium import webdriver
-import desired_capabilities
-
+import test.functional.android.desired_capabilities as desired_capabilities
 
 class ChromeTests(unittest.TestCase):
     def setUp(self):
         desired_caps = {
             'platformName': 'Android',
-            'platformVersion': '4.2',
-            'deviceName': 'Android Emulator',
+            'platformVersion': '7.0',
+            'deviceName': 'Galaxy Tab S3',
             'browserName': 'Chrome'
         }
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
