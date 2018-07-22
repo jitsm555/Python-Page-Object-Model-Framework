@@ -1,13 +1,9 @@
-Appium Python Client
+Python Automation Framework
 ====================
-
-An extension library for adding [Selenium 3.0 draft](https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html) and [Mobile JSON Wire Protocol Specification draft](https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile)
-functionality to the Python language bindings, for use with the mobile testing
-framework [Appium](https://appium.io).
 
 # Getting the Appium Python client
 
-There are three ways to install and use the Appium Python client.
+There are two ways to install and use the Appium Python client.
 
 1. Install from [PyPi](https://pypi.python.org/pypi), as
 ['Appium-Python-Client'](https://pypi.python.org/pypi/Appium-Python-Client).
@@ -16,16 +12,7 @@ There are three ways to install and use the Appium Python client.
     pip install Appium-Python-Client
     ```
 
-2. Install from source, via [PyPi](https://pypi.python.org/pypi). From ['Appium-Python-Client'](https://pypi.python.org/pypi/Appium-Python-Client),
-download and unarchive the source tarball (Appium-Python-Client-X.X.tar.gz).
-
-    ```shell
-    tar -xvf Appium-Python-Client-X.X.tar.gz
-    cd Appium-Python-Client-X.X
-    python setup.py install
-    ```
-
-3. Install from source via [GitHub](https://github.com/appium/python-client).
+2. Install from source via [GitHub](https://github.com/appium/python-client).
 
     ```shell
     git clone git@github.com:appium/python-client.git
@@ -35,27 +22,7 @@ download and unarchive the source tarball (Appium-Python-Client-X.X.tar.gz).
 
 
 # Usage
-
-The Appium Python Client is fully compliant with the Selenium 3.0 specification
-draft, with some helpers to make mobile testing in Python easier. The majority of
-the usage remains as it has been for Selenium 2 (WebDriver), and as the [official
-Selenium Python bindings](https://pypi.python.org/pypi/selenium) begins to
-implement the new specification that implementation will be used underneath, so
-test code can be written that is utilizable with both bindings.
-
-To use the new functionality now, and to use the superset of functions, instead of
-including the Selenium `webdriver` module in your test code, use that from
-Appium instead.
-
-```python
-from appium import webdriver
-```
-
-From there much of your test code will work with no change.
-
-As a base for the following code examples, the following sets up the [UnitTest](https://docs.python.org/2/library/unittest.html)
-environment:
-
+We integrated all Selenium upgraded changes, which makes mobile testing easier in python. We are using appium driver to make remote connection. Please refer below code.  
 ```python
 # Android environment
 import unittest
@@ -63,32 +30,12 @@ from appium import webdriver
 
 desired_caps = {}
 desired_caps['platformName'] = 'Android'
-desired_caps['platformVersion'] = '4.2'
+desired_caps['platformVersion'] = '7.0'
 desired_caps['deviceName'] = 'Android Emulator'
-desired_caps['app'] = PATH('../../../apps/selendroid-test-app.apk')
+desired_caps['app'] = PATH('../../../apps/android-automation.apk')
 
 self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 ```
-
-```python
-# iOS environment
-import unittest
-from appium import webdriver
-
-desired_caps = {}
-desired_caps['platformName'] = 'iOS'
-desired_caps['platformVersion'] = '7.1'
-desired_caps['deviceName'] = 'iPhone Simulator'
-desired_caps['app'] = PATH('../../apps/UICatalog.app.zip')
-
-self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-```
-
-
-## Changed or added functionality
-
-The methods that do change are...
-
 
 ### Switching between 'Native' and 'Webview'
 
@@ -118,27 +65,6 @@ context_name = "WEBVIEW_1"
 driver.switch_to.context(context_name)
 ```
 
-
-### Finding elements by iOS UIAutomation search
-
-This allows elements in iOS applications to be found using recursive element
-search using the UIAutomation library. This method is supported on iOS devices
-that still support UIAutomation, that is, versions which predate XCUITEST.
-
-Adds the methods `driver.find_element_by_ios_uiautomation`
-and `driver.find_elements_by_ios_uiautomation`.
-
-```python
-el = self.driver.find_element_by_ios_uiautomation('.elements()[0]')
-self.assertEqual('UICatalog', el.get_attribute('name'))
-```
-
-```python
-els = self.driver.find_elements_by_ios_uiautomation('.elements()')
-self.assertIsInstance(els, list)
-```
-
-
 ### Finding elements by Android UIAutomator search
 
 This allows elements in an Android application to be found using recursive element
@@ -154,48 +80,6 @@ self.assertIsNotNone(el)
 els = self.driver.find_elements_by_android_uiautomator('new UiSelector().clickable(true)')
 self.assertIsInstance(els, list)
 ```
-
-
-### Finding elements by iOS predicates
-
-This method allows finding elements using iOS predicates. The methods take a
-string in the format of a predicate, including element type and the value of
-fields.
-
-Adds the methods
-`driver.find_element_by_ios_predicate` and `find_elements_by_ios_predicate`.
-
-```python
-el = self.driver.find_element_by_ios_predicate('wdName == "Buttons"')
-self.assertIsNotNone(el)
-```
-
-```python
-els = self.driver.find_elements_by_ios_predicate('wdValue == "SearchBar" AND isWDDivisible == 1')
-self.assertIsInstance(els, list)
-```
-
-
-### Finding elements by iOS class chain
-
-**This method is only for [XCUITest driver](https://github.com/appium/appium-xcuitest-driver)**
-
-This method allows finding elements using iOS class chain. The methods take
-a string in the format of a class chain, including element type.
-
-Adds the methods
-`driver.find_element_by_ios_class_chain` and `find_elements_by_ios_class_chain`.
-
-```python
-el = self.driver.find_element_by_ios_class_chain('XCUIElementTypeWindow/XCUIElementTypeButton[3]')
-self.assertIsNotNone(el)
-```
-
-```python
-els = self.driver.find_elements_by_ios_class_chain('XCUIElementTypeWindow/XCUIElementTypeButton')
-self.assertIsInstance(els, list)
-```
-
 ### Finding elements by Accessibility ID
 
 Allows for elements to be found using the "Accessibility ID". The methods take a
@@ -335,8 +219,8 @@ method. This method takes the bundle id of the application and return `True` or
 `False`.
 
 ```python
-assertFalse(self.driver.is_app_installed('sdfsdf'))
-assertTrue(self.driver.is_app_installed('com.example.android.apis'))
+assertFalse(self.driver.is_app_installed('test'))
+assertTrue(self.driver.is_app_installed('com.example.android.androidautomation'))
 ```
 
 
@@ -346,9 +230,9 @@ To install an uninstalled application on the device, use `device.install_app`,
 sending in the path to the application file or archive.
 
 ```python
-assertFalse(driver.is_app_installed('io.selendroid.testapp'))
-driver.install_app('/Users/isaac/code/python-client/test/apps/selendroid-test-app.apk')
-assertTrue(driver.is_app_installed('io.selendroid.testapp'))
+assertFalse(driver.is_app_installed('com.example.android.androidautomation'))
+driver.install_app('/path/android-automation.apk')
+assertTrue(driver.is_app_installed('com.example.android.androidautomation'))
 ```
 
 
@@ -358,7 +242,7 @@ If you need to remove an application from the device, use `device.remove_app`,
 passing in the application id.
 
 ```python
-assertTrue(driver.is_app_installed('com.example.android.apis'))
+assertTrue(driver.is_app_installed('com.example.android.androidautomation'))
 driver.remove_app('com.example.android.apis')
 assertFalse(driver.is_app_installed('com.example.android.apis'))
 ```
@@ -410,7 +294,7 @@ If the activity is not part of the application under test, it will also
 launch the activity's application.
 
 ```python
-driver.start_activity('com.foo.app', '.MyActivity')
+driver.start_activity('com.example.android.androidautomation', '.LoginActivity')
 ```
 
 
@@ -435,41 +319,6 @@ Android only.
 driver.press_keycode(3)
 ```
 
-
-#### Hiding the keyboard in iOS
-
-To hide the keyboard from view in iOS, use `driver.hide_keyboard`. If a key name
-is sent, the keyboard key with that name will be pressed. If no arguments are
-passed in, the keyboard will be hidden by tapping on the screen outside the text
-field, thus removing focus from it.
-
-```python
-# get focus on text field, so keyboard comes up
-el = driver.find_element_by_class_name('android.widget.TextView')
-el.set_value('Testing')
-
-el = driver.find_element_by_class_name('keyboard')
-assertTrue(el.is_displayed())
-
-driver.hide_keyboard('Done')
-
-assertFalse(el.is_displayed())
-```
-
-```python
-# get focus on text field, so keyboard comes up
-el = driver.find_element_by_class_name('android.widget.TextView')
-el.set_value('Testing')
-
-el = driver.find_element_by__name('keyboard')
-assertTrue(el.is_displayed())
-
-driver.hide_keyboard()
-
-assertFalse(el.is_displayed())
-```
-
-
 #### Retrieving the current running package and activity
 
 The property method `driver.current_package` returns the name of the current
@@ -477,7 +326,7 @@ package running on the device.
 
 ```python
 package = driver.current_package
-assertEquals('com.example.android.apis', package)
+assertEquals('com.example.android.androidautomation', package)
 ```
 
 The property method `driver.current_activity` returns the name of the current
@@ -485,7 +334,7 @@ activity running on the device.
 
 ```python
 activity = driver.current_activity
-assertEquals('.ApiDemos', activity)
+assertEquals('.LoginActivity', activity)
 ```
 
 
@@ -505,79 +354,26 @@ el.set_value('More testing')
 text = el.get_attribute('text')
 assertEqual('More testing', text)
 ```
+#### Set a value to edit text
 
-
-#### Retrieve a file from the device
-
-To retrieve the contents of a file from the device, use `driver.pull_file`, which
-returns the contents of the specified file encoded in [Base64](https://docs.python.org/2/library/base64.html).
+Sometimes one needs to directly set the value of an element on the device. To do
+this, the method `driver.set_value` or `element.set_value` is invoked.
 
 ```python
-# pulling the strings file for our application
-data = driver.pull_file('data/local/tmp/strings.json')
-strings = json.loads(data.decode('base64', 'strict'))
-assertEqual('You can\'t wipe my data, you are a monkey!', strings[u'monkey_wipe_data'])
+el = driver.find_element('editText1') // id of specifed editext
+driver.send_keys(el, 'Testing')
+
+text = el.get_attribute('text')
+assertEqual('Testing', text)
+
+el.send_keys('More testing')
+text = el.get_attribute('text')
+assertEqual('More testing', text)
 ```
-
-
-#### Place a file on the device
-
-To put a file onto the device at a particular place, use the `driver.push_file`
-method, which takes the path and the data, encoded as [Base64](https://docs.python.org/2/library/base64.html), to be written to the file.
-
-```python
-path = 'data/local/tmp/test_push_file.txt'
-data = 'This is the contents of the file to push to the device.'
-driver.push_file(path, data.encode('base64'))
-data_ret = driver.pull_file('data/local/tmp/test_push_file.txt').decode('base64')
-self.assertEqual(data, data_ret)
-```
-
-
-#### End test coverage
-
-There is functionality in the Android emulator to instrument certain activities.
-For information on this, see the [Appium docs](https://github.com/appium/appium/blob/master/docs/en/android_coverage.md). To end this coverage
-and retrieve the data, use `driver.end_test_coverage`, passing in the `intent`
-that is being instrumentalized, and the path to the `coverage.ec` file on the
-device.
-
-```python
-coverage_ec_file = driver.end_test_coverage(intent='android.intent.action.MAIN', path='')
-```
-
-
-#### Lock the device
-
-To lock the device for a certain amount of time, on iOS, use `driver.lock`. The
-argument is the number of seconds to wait before unlocking.
 
 
 #### Shake the device
 
 To shake the device, use `driver.shake`.
 
-
-#### Appium Settings
-
-Settings are a new concept introduced by appium. They are currently not a part of the Mobile JSON Wire Protocol, or the Webdriver spec.
-
-Settings are a way to specify the behavior of the appium server.
-
-Settings are:
-
-Mutable, they can be changed during a session
-Only relevant during the session they are applied. They are reset for each new session.
-Control the way the appium server behaves during test automation. They do not apply to controlling the app or device under test.
-
-See [the docs](https://github.com/appium/appium/blob/master/docs/en/advanced-concepts/settings.md) for more information.
-
-To get settings:
-```python
-settings = driver.get_settings()
-```
-
-To set settings:
-```python
-driver.update_settings({"some setting": "the value"})
 ```
