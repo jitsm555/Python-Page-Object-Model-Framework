@@ -17,5 +17,9 @@ class Login(BasePage):
     def get_password(driver):
         return BasePage.__get__(LoginLocators.PASSWORD_ID, driver)
 
+    def is_login_successful(driver):
+        return BasePage.__get__(LoginLocators.LOGIN_RESULT, driver) == 'Login Successful'
+
+
     def sign_in(driver):
         return BasePage.click(LoginLocators.SIGN_IN_ID, driver)

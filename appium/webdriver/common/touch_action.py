@@ -3,7 +3,7 @@
 # but it is deficient in many ways, and does not work in such a way as to be
 # amenable to Appium's use of iOS UIAutomation and Android UIAutomator
 # So it is reimplemented here.
-#
+# TODO : jitesh Touch action need to be understand
 # Theirs is `TouchActions`. Appium's is `TouchAction`.
 
 import copy

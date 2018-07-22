@@ -8,12 +8,16 @@ def PATH(p):
     )
 
 
-def get_desired_capabilities(app):
-    desired_caps = {
-        'platformName': 'Android',
-        'deviceName': 'Galaxy Tab S3',
-        'app': PATH('../../apps/' + app),
-        'newCommandTimeout': 240
-    }
+'''
+Get the desired capabilities to start the automation which include
+1. platformName
+2. platformVersion
+3. deviceName
+4. app
 
-    return desired_caps
+'''
+
+
+def get_desired_capabilities(app):
+    return dict(platformName='Android', deviceName='Galaxy Tab S3', app=PATH('../../apps/' + app),
+                newCommandTimeout=240)
