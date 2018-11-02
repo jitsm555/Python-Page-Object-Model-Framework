@@ -14,9 +14,10 @@
 
 import unittest
 
-from appium import webdriver
-from appium.common.exceptions import NoSuchContextException
 import desired_capabilities
+from appium import webdriver
+
+from webdriver.util import NoSuchContextException
 
 
 class ContextSwitchingTests(unittest.TestCase):

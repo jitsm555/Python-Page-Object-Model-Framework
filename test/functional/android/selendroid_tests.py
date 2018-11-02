@@ -13,13 +13,12 @@
 # limitations under the License.
 
 import unittest
-
-from appium import webdriver
-from appium.common.exceptions import NoSuchContextException
-import desired_capabilities
 from time import sleep
 
+import desired_capabilities
 from selenium.webdriver.common.touch_actions import TouchActions
+
+from appium import webdriver
 
 
 class SelendroidTests(unittest.TestCase):

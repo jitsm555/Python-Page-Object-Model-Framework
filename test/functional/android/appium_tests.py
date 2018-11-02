@@ -13,20 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
-from zipfile import ZipFile
-import json
 import os
-import random
-from time import sleep
+import unittest
+
 from dateutil.parser import parse
 
-from appium.webdriver.applicationstate import ApplicationState
-from selenium.common.exceptions import NoSuchElementException
-
-from appium import webdriver
 import test.functional.android.desired_capabilities as desired_capabilities
-
+from appium import webdriver
 
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1

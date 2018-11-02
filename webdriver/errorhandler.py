@@ -1,7 +1,7 @@
-from selenium.webdriver.remote import errorhandler
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.remote import errorhandler
 
-from appium.common.exceptions import NoSuchContextException
+from webdriver.util import NoSuchContextException
 
 
 class MobileErrorHandler(errorhandler.ErrorHandler):

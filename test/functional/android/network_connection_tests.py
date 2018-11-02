@@ -15,11 +15,10 @@
 
 import unittest
 
-
-from appium import webdriver
-from appium.webdriver.connectiontype import ConnectionType
 import desired_capabilities
 
+from appium import webdriver
+from webdriver.connectiontype import ConnectionType
 
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1

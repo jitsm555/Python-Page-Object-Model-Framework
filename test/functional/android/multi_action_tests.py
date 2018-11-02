@@ -15,10 +15,11 @@
 import unittest
 from time import sleep
 
+import desired_capabilities
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.common.multi_action import MultiAction
-import desired_capabilities
+
+from webdriver.util import MultiAction
 
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1

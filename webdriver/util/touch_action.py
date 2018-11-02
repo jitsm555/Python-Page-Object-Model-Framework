@@ -1,14 +1,6 @@
-# The Selenium team implemented a version of the Touch Action API in their code
-# (https://code.google.com/p/selenium/source/browse/py/selenium/webdriver/common/touch_actions.py)
-# but it is deficient in many ways, and does not work in such a way as to be
-# amenable to Appium's use of iOS UIAutomation and Android UIAutomator
-# So it is reimplemented here.
-# TODO : jitesh Touch action need to be understand
-# Theirs is `TouchActions`. Appium's is `TouchAction`.
-
 import copy
 
-from appium.webdriver.mobilecommand import MobileCommand as Command
+from webdriver.mobilecommand import MobileCommand as Command
 
 
 class TouchAction(object):

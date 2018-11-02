@@ -1,7 +1,7 @@
-from test.functional.pageobjectmodel.util.wait import WaitForElement
 from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.common.multi_action import MultiAction
-from time import sleep
+
+from test.functional.pageobjectmodel.util.wait import WaitForElement
+from webdriver.util.multi_action import MultiAction
 
 '''
 Base class will contain all common functionality 

@@ -1,11 +1,6 @@
-# The Selenium team implemented something like the Multi Action API in the form of
-# "action chains" (https://code.google.com/p/selenium/source/browse/py/selenium/webdriver/common/action_chains.py).
-# These do not quite work for this situation, and do not allow for ad hoc action
-# chaining as the spec requires.
-
 import copy
 
-from appium.webdriver.mobilecommand import MobileCommand as Command
+from webdriver.mobilecommand import MobileCommand as Command
 
 
 class MultiAction(object):

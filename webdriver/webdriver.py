@@ -1,25 +1,22 @@
-from selenium import webdriver
-
-from .mobilecommand import MobileCommand as Command
-from .errorhandler import MobileErrorHandler
-from .switch_to import MobileSwitchTo
-from .webelement import WebElement as MobileWebElement
-from .imagelement import ImageElement
-
-from appium.webdriver.clipboard_content_type import ClipboardContentType
-from appium.webdriver.common.mobileby import MobileBy
-from appium.webdriver.common.touch_action import TouchAction
-from appium.webdriver.common.multi_action import MultiAction
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import (TimeoutException,
-        WebDriverException, InvalidArgumentException, NoSuchElementException)
-
-from selenium.webdriver.remote.command import Command as RemoteCommand
-
 import base64
 import copy
+
+from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.touch_action import TouchAction
+from selenium import webdriver
+from selenium.common.exceptions import (TimeoutException, WebDriverException, InvalidArgumentException,
+                                        NoSuchElementException)
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.command import Command as RemoteCommand
+from selenium.webdriver.support.ui import WebDriverWait
+
+from .util.multi_action import MultiAction
+from .clipboard_content_type import ClipboardContentType
+from .errorhandler import MobileErrorHandler
+from .imagelement import ImageElement
+from .mobilecommand import MobileCommand as Command
+from .switch_to import MobileSwitchTo
+from .webelement import WebElement as MobileWebElement
 
 DEFAULT_MATCH_THRESHOLD = 0.5
 
@@ -45,6 +42,7 @@ _OSS_W3C_CONVERSION = {
 
 _EXTENSION_CAPABILITY = ':'
 _FORCE_MJSONWP = 'forceMjsonwp'
+
 
 # override
 # Add appium prefix for the non-W3C capabilities
@@ -76,7 +74,6 @@ def _make_w3c_caps(caps):
 
 
 class WebDriver(webdriver.Remote):
-
     def __init__(self, command_executor='http://127.0.0.1:4444/wd/hub',
                  desired_capabilities=None, browser_profile=None, proxy=None, keep_alive=False):
 
@@ -89,9 +86,6 @@ class WebDriver(webdriver.Remote):
         self._switch_to = MobileSwitchTo(self)
 
         # add new method to the `find_by_*` pantheon
-        By.IOS_UIAUTOMATION = MobileBy.IOS_UIAUTOMATION
-        By.IOS_PREDICATE = MobileBy.IOS_PREDICATE
-        By.IOS_CLASS_CHAIN = MobileBy.IOS_CLASS_CHAIN
         By.ANDROID_UIAUTOMATOR = MobileBy.ANDROID_UIAUTOMATOR
         By.ACCESSIBILITY_ID = MobileBy.ACCESSIBILITY_ID
         By.IMAGE = MobileBy.IMAGE
@@ -188,17 +182,17 @@ class WebDriver(webdriver.Remote):
         :rtype: WebElement
         """
         # if self.w3c:
-            # if by == By.ID:
-            #     by = By.CSS_SELECTOR
-            #     value = '[id="%s"]' % value
-            # elif by == By.TAG_NAME:
-            #     by = By.CSS_SELECTOR
-            # elif by == By.CLASS_NAME:
-            #     by = By.CSS_SELECTOR
-            #     value = ".%s" % value
-            # elif by == By.NAME:
-            #     by = By.CSS_SELECTOR
-            #     value = '[name="%s"]' % value
+        # if by == By.ID:
+        #     by = By.CSS_SELECTOR
+        #     value = '[id="%s"]' % value
+        # elif by == By.TAG_NAME:
+        #     by = By.CSS_SELECTOR
+        # elif by == By.CLASS_NAME:
+        #     by = By.CSS_SELECTOR
+        #     value = ".%s" % value
+        # elif by == By.NAME:
+        #     by = By.CSS_SELECTOR
+        #     value = '[name="%s"]' % value
         if by == By.IMAGE:
             return self.find_element_by_image(value)
 
@@ -217,17 +211,17 @@ class WebDriver(webdriver.Remote):
         :rtype: list of WebElement
         """
         # if self.w3c:
-            # if by == By.ID:
-            #     by = By.CSS_SELECTOR
-            #     value = '[id="%s"]' % value
-            # elif by == By.TAG_NAME:
-            #     by = By.CSS_SELECTOR
-            # elif by == By.CLASS_NAME:
-            #     by = By.CSS_SELECTOR
-            #     value = ".%s" % value
-            # elif by == By.NAME:
-            #     by = By.CSS_SELECTOR
-            #     value = '[name="%s"]' % value
+        # if by == By.ID:
+        #     by = By.CSS_SELECTOR
+        #     value = '[id="%s"]' % value
+        # elif by == By.TAG_NAME:
+        #     by = By.CSS_SELECTOR
+        # elif by == By.CLASS_NAME:
+        #     by = By.CSS_SELECTOR
+        #     value = ".%s" % value
+        # elif by == By.NAME:
+        #     by = By.CSS_SELECTOR
+        #     value = '[name="%s"]' % value
 
         # Return empty list if driver returns null
         # See https://github.com/SeleniumHQ/selenium/issues/4555
@@ -238,72 +232,6 @@ class WebDriver(webdriver.Remote):
         return self.execute(RemoteCommand.FIND_ELEMENTS, {
             'using': by,
             'value': value})['value'] or []
-
-    def find_element_by_ios_uiautomation(self, uia_string):
-        """Finds an element by uiautomation in iOS.
-
-        :Args:
-         - uia_string - The element name in the iOS UIAutomation library
-
-        :Usage:
-            driver.find_element_by_ios_uiautomation('.elements()[1].cells()[2]')
-        """
-        return self.find_element(by=By.IOS_UIAUTOMATION, value=uia_string)
-
-    def find_elements_by_ios_uiautomation(self, uia_string):
-        """Finds elements by uiautomation in iOS.
-
-        :Args:
-         - uia_string - The element name in the iOS UIAutomation library
-
-        :Usage:
-            driver.find_elements_by_ios_uiautomation('.elements()[1].cells()[2]')
-        """
-        return self.find_elements(by=By.IOS_UIAUTOMATION, value=uia_string)
-
-    def find_element_by_ios_predicate(self, predicate_string):
-        """Find an element by ios predicate string.
-
-        :Args:
-         - predicate_string - The predicate string
-
-        :Usage:
-            driver.find_element_by_ios_predicate('label == "myLabel"')
-        """
-        return self.find_element(by=By.IOS_PREDICATE, value=predicate_string)
-
-    def find_elements_by_ios_predicate(self, predicate_string):
-        """Finds elements by ios predicate string.
-
-        :Args:
-         - predicate_string - The predicate string
-
-        :Usage:
-            driver.find_elements_by_ios_predicate('label == "myLabel"')
-        """
-        return self.find_elements(by=By.IOS_PREDICATE, value=predicate_string)
-
-    def find_element_by_ios_class_chain(self, class_chain_string):
-        """Find an element by ios class chain string.
-
-        :Args:
-         - class_chain_string - The class chain string
-
-        :Usage:
-            driver.find_element_by_ios_class_chain('XCUIElementTypeWindow/XCUIElementTypeButton[3]')
-        """
-        return self.find_element(by=By.IOS_CLASS_CHAIN, value=class_chain_string)
-
-    def find_elements_by_ios_class_chain(self, class_chain_string):
-        """Finds elements by ios class chain string.
-
-        :Args:
-         - class_chain_string - The class chain string
-
-        :Usage:
-            driver.find_elements_by_ios_class_chain('XCUIElementTypeWindow[2]/XCUIElementTypeAny[-2]')
-        """
-        return self.find_elements(by=By.IOS_CLASS_CHAIN, value=class_chain_string)
 
     def find_element_by_android_uiautomator(self, uia_string):
         """Finds element by uiautomator in Android.
@@ -583,8 +511,7 @@ class WebDriver(webdriver.Remote):
         return self
 
     def hide_keyboard(self, key_name=None, key=None, strategy=None):
-        """Hides the software keyboard on the device. In iOS, use `key_name` to press
-        a particular key, or `strategy`. In Android, no parameters are used.
+        """Hides the software keyboard on the device. In Android, no parameters are used.
 
         :Args:
          - key_name - key to press
@@ -963,21 +890,6 @@ class WebDriver(webdriver.Remote):
         self.execute(Command.SHAKE)
         return self
 
-    def touch_id(self, match):
-        """Simulate touchId on iOS Simulator
-        """
-        data = {
-            'match': match
-        }
-        self.execute(Command.TOUCH_ID, data)
-        return self
-
-    def toggle_touch_id_enrollment(self):
-        """Toggle enroll touchId on iOS Simulator
-        """
-        self.execute(Command.TOGGLE_TOUCH_ID_ENROLLMENT)
-        return self
-
     def open_notifications(self):
         """Open notification shade in Android (API Level 18 and above)
         """
@@ -1121,9 +1033,8 @@ class WebDriver(webdriver.Remote):
         - method: The HTTP method name ('PUT'/'POST'). PUT method is used by default.
         Only has an effect if `remotePath` is set.
         - timeLimit: The actual time limit of the recorded video in seconds.
-        The default value for both iOS and Android is 180 seconds (3 minutes).
+        The default value for Android is 180 seconds (3 minutes).
         The maximum value for Android is 3 minutes.
-        The maximum value for iOS is 10 minutes.
         - forcedRestart: Whether to ignore the result of previous capture and start a new recording
         immediately (`True` value). By default  (`False`) the endpoint will try to catch and return the result of
         the previous capture if it's still available.
@@ -1131,12 +1042,6 @@ class WebDriver(webdriver.Remote):
         such as a timestamp, that is helpful in videos captured to illustrate bugs.
         This option is only supported since API level 27 (Android P).
 
-        iOS Specific:
-        - videoQuality: The video encoding quality: 'low', 'medium', 'high', 'photo'. Defaults to 'medium'.
-        Only works for real devices.
-        - videoType: The format of the screen capture to be recorded.
-        Available formats: 'h264', 'mp4' or 'fmp4'. Default is 'mp4'.
-        Only works for Simulator.
 
         Android Specific:
         - videoSize: The video size of the generated media file. The format is WIDTHxHEIGHT.
@@ -1348,11 +1253,6 @@ class WebDriver(webdriver.Remote):
         - level: Battery level in range [0.0, 1.0], where 1.0 means 100% charge.
         Any value lower than 0 means the level cannot be retrieved
         - state: Platform-dependent battery state value.
-        On iOS (XCUITest):
-        - 1: Unplugged
-        - 2: Charging
-        - 3: Full
-        Any other value means the state cannot be retrieved
         On Android (UIAutomator2):
         - 2: Charging
         - 3: Discharging

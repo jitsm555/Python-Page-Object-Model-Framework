@@ -83,7 +83,7 @@ self.assertIsInstance(els, list)
 ### Finding elements by Accessibility ID
 
 Allows for elements to be found using the "Accessibility ID". The methods take a
-string representing the accessibility id or label attached to a given element, e.g., for iOS the accessibility identifier and for Android the content-description. Adds the methods
+string representing the accessibility id or label attached to a given element
 `driver.find_element_by_accessibility_id` and `find_elements_by_accessibility_id`.
 
 ```python
