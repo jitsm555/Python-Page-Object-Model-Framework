@@ -1,25 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
 import unittest
 
+from appium import webdriver
 from dateutil.parser import parse
 
-import test.functional.android.desired_capabilities as desired_capabilities
-from appium import webdriver
+import test.functional.pageobjectmodel.util.desired_capabilities as desired_capabilities
 
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1
@@ -36,6 +21,7 @@ class AppiumTests(unittest.TestCase):
         # remove zipped file from `test_pull_folder`
         if hasattr(self, 'zipfilename') and os.path.isfile(self.zipfilename):
             os.remove(self.zipfilename)
+
     #
     # def test_screen_record(self):
     #     self.driver.start_recording_screen(timeLimit=10, forcedRestart=True)

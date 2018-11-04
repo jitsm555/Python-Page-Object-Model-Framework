@@ -1,25 +1,27 @@
 from test.functional.pageobjectmodel.locators.login_locator import LoginLocators
-from test.functional.pageobjectmodel.pageobject.basepage import BasePage
+from test.functional.pageobjectmodel.pageobject import *
 
 
 class Login(BasePage):
-    def set_email_id(driver, email_id):
-        BasePage.__set__(LoginLocators.EMAIL_ID, driver, email_id)
 
-    @staticmethod
-    def get_user_name(driver):
-        return BasePage.__get__(LoginLocators.EMAIL_ID, driver)
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
 
-    def set_password(driver, password):
-        BasePage.__set__(LoginLocators.PASSWORD_ID, driver, password)
+    def set_email_id(self, email_id):
+        self.__set__(LoginLocators.EMAIL_ID, email_id)
 
-    @staticmethod
-    def get_password(driver):
-        return BasePage.__get__(LoginLocators.PASSWORD_ID, driver)
+    def get_user_name(self):
+        return self.__get__(LoginLocators.EMAIL_ID)
 
-    def is_login_successful(driver):
-        return BasePage.__get__(LoginLocators.LOGIN_RESULT, driver) == 'Login Successful'
+    def set_password(self, password):
+        self.__set__(LoginLocators.PASSWORD_ID, password)
 
+    def get_password(self):
+        return self.__get__(LoginLocators.PASSWORD_ID)
 
-    def sign_in(driver):
-        return BasePage.click(LoginLocators.SIGN_IN_ID, driver)
+    def is_login_successful(self):
+        return self.__get__(LoginLocators.LOGIN_RESULT) == 'Login Successful'
+
+    def sign_in(self):
+        return self.click(LoginLocators.SIGN_IN_ID)

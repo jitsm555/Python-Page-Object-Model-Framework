@@ -6,3 +6,4 @@ class MainActivityLocators:
     LOGIN_ID = (By.ID, 'loginButton')
     MOVIES_LIST_ID = (By.ID, 'movieListButton')
     PHOTO_VIEWER_ID = (By.ID, 'photoViewerButton')
+    VIEW_PAGER_ID = (By.ID, 'viewPagerButton')

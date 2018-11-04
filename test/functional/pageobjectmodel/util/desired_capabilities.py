@@ -10,7 +10,7 @@ def PATH(p):
 
 '''
 Get the desired capabilities to start the automation which include
-1. platformName
+1. platformName 
 2. platformVersion
 3. deviceName :  On Android this capability is currently ignored, though it remains required.
 4. app: app=PATH('../../apps/' + app)
@@ -25,5 +25,6 @@ Get the desired capabilities to start the automation which include
 
 
 def get_desired_capabilities(app):
-    return dict(platformName='Android', deviceName='Galaxy Tab S3', appPackage='com.medtronic.neuro.dbs.clinician',
-                appActivity='.application.lifecycle.activities.StartAppActivity', newCommandTimeout=240)
+    return dict(platformName='Android', deviceName='Galaxy Tab S3',
+                app=PATH('../../../apps/' + app), appPackage='com.jiteshmohite619.androidautomation',
+                appActivity='.MainActivity', newCommandTimeout=240)

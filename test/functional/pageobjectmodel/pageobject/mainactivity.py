@@ -1,13 +1,20 @@
 from test.functional.pageobjectmodel.locators.main_activity_locator import MainActivityLocators
-from test.functional.pageobjectmodel.pageobject.basepage import BasePage
+from test.functional.pageobjectmodel.pageobject import *
 
 
 class MainActivity(BasePage):
-    def go_to_login(driver):
-        return BasePage.click(MainActivityLocators.LOGIN_ID, driver)
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
 
-    def go_to_movies_list(driver):
-        return BasePage.click(MainActivityLocators.MOVIES_LIST_ID, driver)
+    def go_to_login(self):
+        return self.click(MainActivityLocators.LOGIN_ID)
 
-    def go_to_photo_viewer(driver):
-        return BasePage.click(MainActivityLocators.PHOTO_VIEWER_ID, driver)
+    def go_to_movies_list(self):
+        return self.click(MainActivityLocators.MOVIES_LIST_ID)
+
+    def go_to_photo_viewer(self):
+        return self.click(MainActivityLocators.PHOTO_VIEWER_ID)
+
+    def go_to_view_pager(self):
+        return self.click(MainActivityLocators.VIEW_PAGER_ID)
