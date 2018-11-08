@@ -6,6 +6,10 @@ from selenium.webdriver.common.touch_actions import TouchActions
 
 from appium import webdriver
 
+"""
+TODO: In-Progress, Refer page object model
+"""
+
 
 class SelendroidTests(unittest.TestCase):
     def setUp(self):

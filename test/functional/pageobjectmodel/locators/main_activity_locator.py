@@ -1,5 +1,10 @@
 from selenium.webdriver.common.by import By
 
+"""
+This class contains all common ID's of main activity page, with these id's we are executing tests 
+
+"""
+
 
 class MainActivityLocators:
     """ It contains all locators related to login page"""

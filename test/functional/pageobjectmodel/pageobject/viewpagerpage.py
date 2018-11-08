@@ -1,5 +1,8 @@
-from test.functional.pageobjectmodel.locators.viewpagerlocator import ViewPagerLocator
 from test.functional.pageobjectmodel.pageobject import *
+
+"""
+This class contains all common method which we will require while executing view pager test
+"""
 
 
 class ViewPager(BasePage):

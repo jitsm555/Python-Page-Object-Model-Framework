@@ -8,6 +8,10 @@ from webdriver.connectiontype import ConnectionType
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1
 
+"""
+TODO: In-Progress, Refer page object model
+"""
+
 
 class NetworkConnectionTests(unittest.TestCase):
     def setUp(self):
@@ -16,7 +20,6 @@ class NetworkConnectionTests(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-
 
     def test_get_network_connection(self):
         nc = self.driver.network_connection

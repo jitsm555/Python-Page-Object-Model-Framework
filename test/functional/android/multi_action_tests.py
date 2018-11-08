@@ -10,6 +10,10 @@ from webdriver.util import MultiAction
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1
 
+"""
+TODO: In-Progress, Refer page object model
+"""
+
 
 class MultiActionTests(unittest.TestCase):
     def setUp(self):

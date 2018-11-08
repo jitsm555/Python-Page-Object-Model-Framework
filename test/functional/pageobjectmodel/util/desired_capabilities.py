@@ -1,13 +1,5 @@
 import os
 
-
-# Returns abs path relative to this file and not cwd
-def PATH(p):
-    return os.path.abspath(
-        os.path.join(os.path.dirname(__file__), p)
-    )
-
-
 '''
 Get the desired capabilities to start the automation which include
 1. platformName 
@@ -15,13 +7,19 @@ Get the desired capabilities to start the automation which include
 3. deviceName :  On Android this capability is currently ignored, though it remains required.
 4. app: app=PATH('../../apps/' + app)
 
-    if you don't have apk of application then provide appPackage and appActivity
-
+    If you don't have apk of application then provide appPackage and appActivity
 5. appPackage 
 6. appActivity
 
 
 '''
+
+
+# Returns abs path relative to this file and not cwd
+def PATH(p):
+    return os.path.abspath(
+        os.path.join(os.path.dirname(__file__), p)
+    )
 
 
 def get_desired_capabilities(app):

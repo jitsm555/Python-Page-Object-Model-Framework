@@ -10,6 +10,10 @@ from webdriver.util.touch_action import TouchAction
 # the emulator is sometimes slow
 SLEEPY_TIME = 2
 
+"""
+TODO: In-Progress, Refer page object model
+"""
+
 
 class TouchActionTests(unittest.TestCase):
     def setUp(self):

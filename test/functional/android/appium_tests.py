@@ -7,6 +7,9 @@ from dateutil.parser import parse
 import test.functional.pageobjectmodel.util.desired_capabilities as desired_capabilities
 
 # the emulator is sometimes slow and needs time to think
+"""
+TODO: In-Progress, Refer page object model
+"""
 SLEEPY_TIME = 1
 
 

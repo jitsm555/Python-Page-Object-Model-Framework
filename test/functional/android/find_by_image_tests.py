@@ -7,9 +7,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import desired_capabilities
 
+"""
+TODO: In-Progress, Refer page object model
+"""
+
 
 class FindByImageTests(unittest.TestCase):
-
     def setUp(self):
         desired_caps = desired_capabilities.get_desired_capabilities('ApiDemos-debug.apk')
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)

@@ -1,9 +1,12 @@
 from test.functional.pageobjectmodel.locators.login_locator import LoginLocators
 from test.functional.pageobjectmodel.pageobject import *
 
+"""
+This class contains all common method which we will require while executing login test
+"""
+
 
 class Login(BasePage):
-
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver

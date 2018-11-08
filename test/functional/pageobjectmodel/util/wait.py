@@ -1,6 +1,10 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 
+"""
+This class wait for element with specified time, If not getting it throws exception
+"""
+
 
 class WaitForElement:
     @staticmethod

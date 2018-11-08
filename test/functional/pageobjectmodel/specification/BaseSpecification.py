@@ -5,6 +5,10 @@ from appium import webdriver
 import test.functional.pageobjectmodel.util.desired_capabilities as desired_capabilities
 from test.functional.pageobjectmodel.util.application import Application
 
+"""
+This class is responsible for creating driver connection with appium server
+"""
+
 
 class BaseSpecification(unittest.TestCase):
     def setUp(self):

@@ -5,7 +5,14 @@ import time
 import pytest
 
 '''
-Login credential to do login
+This class will contain all common sample test which are using android application components. Which includes:
+1. Click event
+2. Long click event
+3. Scrolling
+4. Pinch Zoom
+5. Swipe, etc
+
+This class will give us better idea about page object model usage 
 '''
 EMAIL_ID = 'admin@gmail.com'
 PASSWORD = 'admin@123'

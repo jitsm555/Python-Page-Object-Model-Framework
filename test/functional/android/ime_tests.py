@@ -6,11 +6,14 @@ from selenium.common.exceptions import NoSuchElementException
 from appium import webdriver
 import desired_capabilities
 
-
 # the emulator is sometimes slow and needs time to think
 SLEEPY_TIME = 1
 
 LATIN_IME = u'com.android.inputmethod.latin/.LatinIME'
+
+"""
+TODO: In-Progress, Refer page object model
+"""
 
 
 class IMETests(unittest.TestCase):
@@ -20,7 +23,6 @@ class IMETests(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-
 
     def test_available_ime_engines(self):
         engines = self.driver.available_ime_engines

@@ -1,6 +1,10 @@
 from test.functional.pageobjectmodel.locators.main_activity_locator import MainActivityLocators
 from test.functional.pageobjectmodel.pageobject import *
 
+"""
+This class contains all common method which we will require while executing main activity test
+"""
+
 
 class MainActivity(BasePage):
     def __init__(self, driver):
